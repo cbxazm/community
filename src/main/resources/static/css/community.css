@@ -1,0 +1,14 @@
+/*自定义的样式文件*/
+.main{
+    margin: 30px;
+    background-color: white;
+
+}
+body{
+    background-color: #efefef;
+}
+/*发布按钮的自定义样式*/
+.sb{
+    float: right;
+    margin-bottom: 15px;
+}
