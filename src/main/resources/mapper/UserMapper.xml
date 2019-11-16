@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cbx.springbootcommunity.mapper.UserMapper">
-    <select id="insert" resultType="User">
+    <!--配置resultMap-->
+    <resultMap id="user" type="User">
+           <id property="id" column="id" javaType="java.lang.Integer"></id>
+           <result property="name" column="name" javaType="String"></result>
+          <result property="accountId" column="account_id" javaType="String"></result>
+        <result property="token" column="token" javaType="String"></result>
+        <result property="gmtCreate" column="gmt_create" javaType="Long"></result>
+        <result property="gmtModified" column="gmt_modified" javaType="Long"></result>
+    </resultMap>
+    <select id="insert" resultMap="user" parameterType="User">
             insert into user (account_id,name,token,gmt_create,gmt_modified) VALUES (#{accountId},#{name},#{token},#{gmtCreate},#{gmtModified})
+    </select>
+    <select id="findByToken" resultMap="user" parameterType="String">
+               SELECT * from user where token=#{token}
     </select>
 </mapper>
