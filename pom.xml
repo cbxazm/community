@@ -78,7 +78,13 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.57</version>
 		</dependency>
-
+		<dependency>
+			<!--添加热部署，不需要每次重启项目-->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+			<!--<version>2.2.0.RELEASE</version>-->
+		</dependency>
 	</dependencies>
 
 	<build>
