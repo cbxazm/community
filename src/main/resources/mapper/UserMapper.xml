@@ -4,6 +4,7 @@
     <!--配置resultMap-->
     <resultMap id="user" type="User">
            <id property="id" column="id" javaType="java.lang.Integer"></id>
+        <result property="avatarUrl" column="avatar_url" javaType="String"></result>
            <result property="name" column="name" javaType="String"></result>
           <result property="accountId" column="account_id" javaType="String"></result>
         <result property="token" column="token" javaType="String"></result>
@@ -11,7 +12,7 @@
         <result property="gmtModified" column="gmt_modified" javaType="Long"></result>
     </resultMap>
     <select id="insert" resultMap="user" parameterType="User">
-            insert into user (account_id,name,token,gmt_create,gmt_modified) VALUES (#{accountId},#{name},#{token},#{gmtCreate},#{gmtModified})
+            insert into user (account_id,name,token,gmt_create,gmt_modified,avatar_url) VALUES (#{accountId},#{name},#{token},#{gmtCreate},#{gmtModified},#{avatarUrl})
     </select>
     <select id="findByToken" resultMap="user" parameterType="String">
                SELECT * from user where token=#{token}

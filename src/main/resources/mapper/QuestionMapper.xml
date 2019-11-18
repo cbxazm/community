@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.4//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cbx.springbootcommunity.mapper.QuestionMapper">
+    <resultMap id="question" type="Question">
+        <id property="id" column="id" javaType="Integer"></id>
+        <result property="title" column="title" javaType="String"></result>
+        <result property="description" column="description" javaType="String"></result>
+        <result property="gmtCreate" column="gmt_create" javaType="Integer"></result>
+        <result property="gmtModified" column="gmt_modified" javaType="Integer"></result>
+        <result property="commentCount" column="comment_count" javaType="Integer"></result>
+        <result property="ViewCount" column="view_count" javaType="Integer"></result>
+        <result property="likeCount" column="like_count" javaType="Integer"></result>
+        <result property="tag" column="tag" javaType="String"></result>
+        <result property="creatorId" column="creatorId" javaType="Integer"></result>
+      <!--关联User表-->
+        <association property="user" column="creatorId" javaType="User">
+                   <id property="id" column="id" javaType="Integer"></id>
+                <result property="avatarUrl" column="avatar_url" javaType="String"></result>
+        </association>
+    </resultMap>
     <insert id="create" parameterType="Question">
         insert into question (title,description,gmt_create,gmt_modified,creatorId,comment_count,view_count,like_count,tag) VALUES
          (#{title},#{description},#{gmtCreate},#{gmtModified},#{creatorId},#{commentCount},#{viewCount},#{likeCount},#{tag})
     </insert>
+    <select id="list" resultMap="question">
+         SELECT u.avatar_url,q.* from question q left join user u on q.creatorId=u.id
+    </select>
 </mapper>

@@ -22,6 +22,7 @@ public class PublishController {
       public String publish(){
            return "publish";
       }
+//      使用post方式获取请求页面
       @PostMapping("/publish")
     public String doPublish(
             @RequestParam("title") String title,
