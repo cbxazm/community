@@ -38,6 +38,7 @@ public class IndexController {
             }
         }
         List<Question> questionList=questionMapper.list();
+        System.out.println(questionList);
         model.addAttribute("questions",questionList);
 
         return "index";

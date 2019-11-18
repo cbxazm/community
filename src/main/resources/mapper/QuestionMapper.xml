@@ -5,8 +5,8 @@
         <id property="id" column="id" javaType="Integer"></id>
         <result property="title" column="title" javaType="String"></result>
         <result property="description" column="description" javaType="String"></result>
-        <result property="gmtCreate" column="gmt_create" javaType="Integer"></result>
-        <result property="gmtModified" column="gmt_modified" javaType="Integer"></result>
+        <result property="gmtCreate" column="gmt_create" javaType="Long"></result>
+        <result property="gmtModified" column="gmt_modified" javaType="Long"></result>
         <result property="commentCount" column="comment_count" javaType="Integer"></result>
         <result property="ViewCount" column="view_count" javaType="Integer"></result>
         <result property="likeCount" column="like_count" javaType="Integer"></result>
@@ -23,6 +23,6 @@
          (#{title},#{description},#{gmtCreate},#{gmtModified},#{creatorId},#{commentCount},#{viewCount},#{likeCount},#{tag})
     </insert>
     <select id="list" resultMap="question">
-         SELECT u.avatar_url,q.* from question q left join user u on q.creatorId=u.id
+         SELECT u.*,q.* from question q left join user u on q.creatorId=u.id
     </select>
 </mapper>
