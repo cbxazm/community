@@ -31,6 +31,7 @@ public class PaginationDTO {
         this.page=page;
         pages.add(page);
         for (int i=1;i<=3;i++){
+            //当前前后最多三个页码
          if(page-i>0){
                      //往头部加 会自动追加，把后来的数放在前面
              pages.add(0,page-i);
