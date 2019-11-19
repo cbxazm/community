@@ -22,7 +22,7 @@
         insert into question (title,description,gmt_create,gmt_modified,creatorId,comment_count,view_count,like_count,tag) VALUES
          (#{title},#{description},#{gmtCreate},#{gmtModified},#{creatorId},#{commentCount},#{viewCount},#{likeCount},#{tag})
     </insert>
-    <select id="list" resultMap="question">
-         SELECT u.*,q.* from question q left join user u on q.creatorId=u.id
-    </select>
+    <!--<select id="list" resultMap="question">-->
+         <!--SELECT u.*,q.* from question q left join user u on q.creatorId=u.id-->
+    <!--</select>-->
 </mapper>

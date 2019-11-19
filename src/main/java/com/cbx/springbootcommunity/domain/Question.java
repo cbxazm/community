@@ -14,6 +14,6 @@ public class Question {
            private Integer likeCount;
            private String tag;
            private Integer creatorId;
-           private User user;
+
 
 }
