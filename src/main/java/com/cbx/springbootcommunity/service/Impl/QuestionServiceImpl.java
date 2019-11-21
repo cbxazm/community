@@ -33,17 +33,20 @@ public class QuestionServiceImpl implements QuestionService {
         }
         //size*(page-1)
         Integer offset=size*(page-1);
-        List<Question> questions = questionMapper.list(offset,size);
-        List<QuestionDto> questionDtoList=new ArrayList<>();
-        for (Question question:questions){
-           User user=userMapper.findById(question.getCreatorId());
-            QuestionDto questionDto = new QuestionDto();
-            //将对象传入该对象 question-->questionDto
-            BeanUtils.copyProperties(question,questionDto);
-            questionDto.setUser(user);
-            questionDtoList.add(questionDto);
+        if (totalCount!=0){
+            List<Question> questions = questionMapper.list(offset,size);
+            List<QuestionDto> questionDtoList=new ArrayList<>();
+            for (Question question:questions){
+                User user=userMapper.findById(question.getCreatorId());
+                QuestionDto questionDto = new QuestionDto();
+                //将对象传入该对象 question-->questionDto
+                BeanUtils.copyProperties(question,questionDto);
+                questionDto.setUser(user);
+                questionDtoList.add(questionDto);
+            }
+            paginationDTO.setQuestionDtos(questionDtoList);
         }
-        paginationDTO.setQuestionDtos(questionDtoList);
+
         return paginationDTO;
     }
 

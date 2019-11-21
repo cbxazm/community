@@ -5,6 +5,7 @@ import com.cbx.springbootcommunity.dto.AccessTokenDto;
 import com.cbx.springbootcommunity.dto.GithubUser;
 import com.cbx.springbootcommunity.mapper.UserMapper;
 import com.cbx.springbootcommunity.provider.GithubProvider;
+import com.cbx.springbootcommunity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import java.util.UUID;
 
 @Controller
 public class AuthorizeController {
+    @Autowired
+    private UserService userService;
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -52,10 +55,11 @@ public class AuthorizeController {
               user.setName(githubUser.getName());
 //              String.valueof() 将Long类型转换为字符串
               user.setAccountId(String.valueOf(githubUser.getId()));
-              user.setGmtCreate(System.currentTimeMillis());
-              user.setGmtModified(user.getGmtCreate());
+//              user.setGmtCreate(System.currentTimeMillis());
+//              user.setGmtModified(user.getGmtCreate());
               user.setAvatarUrl(githubUser.getAvatar_url());
-              userMapper.insert(user);
+              userService.createOrUpdate(user);
+//              userMapper.insert(user);
               //手动注入cookie
               response.addCookie(new Cookie("token",token));
 //              //登录成功
@@ -66,6 +70,17 @@ public class AuthorizeController {
            return "redirect:/";
           }
 
+       }
+       @GetMapping("/logout")
+       public String logout(HttpServletRequest request,HttpServletResponse response){
+           request.getSession().removeAttribute("user");
+           /**
+            * 清除cookie
+            */
+           Cookie cookie=new Cookie("token",null);
+           cookie.setMaxAge(0);
+           response.addCookie(cookie);
+                return "redirect:/";
        }
 
 }
