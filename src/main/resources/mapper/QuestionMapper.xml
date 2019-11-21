@@ -24,5 +24,8 @@
     </insert>
     <!--<select id="list" resultMap="question">-->
          <!--SELECT u.*,q.* from question q left join user u on q.creatorId=u.id-->
+    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+    <!--<select id="listByUserId" resultMap="question" parameterType="Integer">-->
+         <!--SELECT * from question WHERE creatorId=#{userId} limit #{offset},#{size}-->
     <!--</select>-->
 </mapper>

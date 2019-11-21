@@ -25,7 +25,6 @@ public class QuestionServiceImpl implements QuestionService {
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalCount = questionMapper.count();
         paginationDTO.setPagination(totalCount,page,size);
-
         if(page<1){
             page=1;
         }
@@ -47,5 +46,47 @@ public class QuestionServiceImpl implements QuestionService {
         paginationDTO.setQuestionDtos(questionDtoList);
         return paginationDTO;
     }
+
+    @Override
+    public QuestionDto getById(Integer id) {
+        Question question=questionMapper.getById(id);
+        User user=userMapper.findById(question.getCreatorId());
+        QuestionDto questionDto=new QuestionDto();
+        BeanUtils.copyProperties(question,questionDto);
+         questionDto.setUser(user);
+        return questionDto;
+    }
+
+
+
+
+    //    @Override
+//    public PaginationDTO list(Integer userId, Integer page, Integer size) {
+//        PaginationDTO paginationDTO = new PaginationDTO();
+//        Integer totalCount = questionMapper.countByUserId(userId);
+//        paginationDTO.setPagination(totalCount,page,size);
+//        if(page<1){
+//            page=1;
+//        }
+//        if(page>paginationDTO.getTotalPage()){
+//            page=paginationDTO.getTotalPage();
+//        }
+//        //size*(page-1)
+//        Integer offset=size*(page-1);
+//        List<Question> questions = questionMapper.l;
+//        List<QuestionDto> questionDtoList=new ArrayList<>();
+//        for (Question question:questions){
+//            User user=userMapper.findById(question.getCreatorId());
+//            QuestionDto questionDto = new QuestionDto();
+//            //将对象传入该对象 question-->questionDto
+//            BeanUtils.copyProperties(question,questionDto);
+//            questionDto.setUser(user);
+//            questionDtoList.add(questionDto);
+//        }
+//        paginationDTO.setQuestionDtos(questionDtoList);
+//        return paginationDTO;
+//    }
+
+
 
 }
